@@ -1,0 +1,13 @@
+generated: '2026-07-20'
+method: searched
+probe: true
+source: https://www.getnoded.ai/security/
+url: https://www.getnoded.ai/security/
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://www.getnoded.ai/security/
+  keywords:
+  - soc 2
+  - gdpr

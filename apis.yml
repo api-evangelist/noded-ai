@@ -1,8 +1,29 @@
 aid: noded-ai
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/noded-ai.png
 name: Noded AI
-description: 'Noded AI is a company surfaced as a portfolio company of bessemer-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. Sector: ai-ml. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Noded AI is a customer context graph for customer success, retention, and
+  growth teams. It consumes customer data scattered across 20+ tools — call recordings
+  (Gong, Zoom, Meet, Fathom, Fireflies, Granola), email, notes, support tickets (Zendesk),
+  CRM (Salesforce), and product/engineering signals (Linear) — and weaves every account
+  into one living story, then surfaces a no-nonsense assessment of renewal or churn in
+  minutes rather than months. Noded turns mentions of new teams, integrations, or initiatives
+  across the customer ecosystem into qualified plays, and acts wherever teams already work:
+  answering @noded questions in Slack, drafting QBR decks from the live account story,
+  updating Salesforce fields, and filing Linear tickets. It connects the customer stack to
+  ChatGPT, Claude, and Gemini so humans and agents stay aligned. Noded is a SaaS application
+  and a consumer of third-party APIs rather than a public API producer; no first-party
+  developer API, SDK, or MCP server is published as of this profiling.'
 url: https://raw.githubusercontent.com/api-evangelist/noded-ai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,10 +33,17 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Ai Ml
+- Customer Success
+- Customer Data
+- Churn
+- Retention
+- Revenue Operations
+- SaaS
+- AI Agents
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,5 +51,30 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/noded-ai-trust-center.yml
+- type: Compliance
+  url: https://www.getnoded.ai/security/
+- type: DomainSecurity
+  url: security/noded-ai-domain-security.yml
 - type: Website
-  url: https://noded.so/
+  url: https://www.getnoded.ai/
+- type: Blog
+  url: https://www.getnoded.ai/post/hello-world
+- type: Pricing
+  url: https://www.getnoded.ai/pricing
+- type: SignUp
+  url: https://www.getnoded.ai/
+- type: TermsOfService
+  url: https://www.getnoded.ai/terms
+- type: PrivacyPolicy
+  url: https://www.getnoded.ai/privacy
+- type: X
+  url: https://x.com/nodedhq
+- type: LinkedIn
+  url: https://www.linkedin.com/company/nodedai
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 2
+  pass: local-v1
