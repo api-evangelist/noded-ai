@@ -1,29 +1,35 @@
 aid: noded-ai
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: paid
+  onboarding: self-serve
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-08-13'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/noded-ai.png
 name: Noded AI
 description: 'Noded AI is a customer context graph for customer success, retention, and
   growth teams. It consumes customer data scattered across 20+ tools — call recordings
   (Gong, Zoom, Meet, Fathom, Fireflies, Granola), email, notes, support tickets (Zendesk),
-  CRM (Salesforce), and product/engineering signals (Linear) — and weaves every account
-  into one living story, then surfaces a no-nonsense assessment of renewal or churn in
+  CRM (Salesforce, HubSpot), and product/engineering signals (Linear, Jira) — and weaves every
+  account into one living story, then surfaces a no-nonsense assessment of renewal or churn in
   minutes rather than months. Noded turns mentions of new teams, integrations, or initiatives
   across the customer ecosystem into qualified plays, and acts wherever teams already work:
   answering @noded questions in Slack, drafting QBR decks from the live account story,
-  updating Salesforce fields, and filing Linear tickets. It connects the customer stack to
-  ChatGPT, Claude, and Gemini so humans and agents stay aligned. Noded is a SaaS application
-  and a consumer of third-party APIs rather than a public API producer; no first-party
-  developer API, SDK, or MCP server is published as of this profiling.'
+  updating Salesforce fields, and filing Linear tickets. Since mid-2026 Noded also ships a
+  developer surface: a first-party browser SDK (@bigfootai/noded-sdk on npm) over an Apollo
+  GraphQL API at api.getnoded.ai/api/v1/graph, OIDC auth against a Noded-hosted Auth0 tenant,
+  a provider-published AGENTS.md for coding agents, an llms.txt, and a single hosted MCP layer
+  that exposes the whole customer stack to Claude, ChatGPT, and Gemini with per-agent tool
+  scoping and one identity per agent workload. Developer credentials (issuer, client ID, API
+  audience) and the MCP endpoint are provisioned by the Noded team on request rather than
+  self-serve, and no OpenAPI, GraphQL SDL, or public API reference is published.'
 url: https://raw.githubusercontent.com/api-evangelist/noded-ai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -33,7 +39,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-13'
 tags:
 - Company
 - Ai Ml
@@ -44,7 +50,62 @@ tags:
 - Revenue Operations
 - SaaS
 - AI Agents
-apis: []
+- GraphQL
+- MCP
+- Agent Native
+- Customer Context Graph
+apis:
+- name: Noded GraphQL API
+  description: >-
+    The Noded (Apollo) GraphQL API behind the Customer Context Graph. One POST endpoint serving
+    people and accounts (both modelled as tags), the unified activity timeline (blocks: notes,
+    emails, tasks, messages, meeting transcriptions, events), note write-back, and graph memory
+    (topic/value/confidence entries the graph has learned about a person or account). Consumed
+    through the first-party @bigfootai/noded-sdk typed helpers or directly via the SDK's
+    graphql() escape hatch. Auth is OIDC (browser), a caller-supplied bearer token, or a
+    server-only API key; every call is scoped to the signed-in user's tenant and permissions.
+    Credentials are provisioned by Noded on request — there is no self-serve key flow, no
+    published SDL, and no public API reference beyond the developer page.
+  humanURL: https://www.getnoded.ai/developers
+  baseURL: https://api.getnoded.ai/api/v1/graph
+  tags:
+  - GraphQL
+  - Customer Data
+  - Customer Success
+  - Revenue Operations
+  - AI Agents
+  - MCP
+  properties:
+  - type: DeveloperPortal
+    url: https://www.getnoded.ai/developers
+  - type: Documentation
+    url: https://www.getnoded.ai/developers
+  - type: APIReference
+    url: https://www.getnoded.ai/developers#reference
+  - type: GettingStarted
+    url: https://www.getnoded.ai/developers#quickstart
+  - type: GraphQL
+    url: graphql/noded-ai-graphql-operations.yml
+  - type: Authentication
+    url: authentication/noded-ai-authentication.yml
+  - type: OAuthScopes
+    url: scopes/noded-ai-scopes.yml
+  - type: ErrorCatalog
+    url: errors/noded-ai-problem-types.yml
+  - type: Conventions
+    url: conventions/noded-ai-conventions.yml
+  - type: DataModel
+    url: data-model/noded-ai-data-model.yml
+  - type: RateLimits
+    url: rate-limits/noded-ai-rate-limits.yml
+  - type: Lifecycle
+    url: lifecycle/noded-ai-lifecycle.yml
+  - type: MCPServer
+    url: mcp/noded-ai-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: SDKs
+    url: packages/noded-ai-packages.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -60,11 +121,13 @@ common:
 - type: Website
   url: https://www.getnoded.ai/
 - type: Blog
-  url: https://www.getnoded.ai/post/hello-world
+  url: https://www.getnoded.ai/blog
 - type: Pricing
   url: https://www.getnoded.ai/pricing
 - type: SignUp
-  url: https://www.getnoded.ai/
+  url: https://app.getnoded.ai
+- type: Login
+  url: https://app.getnoded.ai
 - type: TermsOfService
   url: https://www.getnoded.ai/terms
 - type: PrivacyPolicy
@@ -73,8 +136,52 @@ common:
   url: https://x.com/nodedhq
 - type: LinkedIn
   url: https://www.linkedin.com/company/nodedai
+- type: DeveloperPortal
+  url: https://www.getnoded.ai/developers
+- type: Documentation
+  url: https://www.getnoded.ai/developers
+- type: APIReference
+  url: https://www.getnoded.ai/developers#reference
+- type: GettingStarted
+  url: https://www.getnoded.ai/developers#quickstart
+- type: Support
+  url: https://www.getnoded.ai/contact-us
+- type: GitHubOrganization
+  url: https://github.com/Notify-AI
+- type: StatusPage
+  url: https://status.getnoded.ai/
+- type: LLMsTxt
+  url: llms/noded-ai-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Packages
+  url: packages/noded-ai-packages.yml
+- type: SDKs
+  url: packages/noded-ai-packages.yml
+- type: GraphQL
+  url: graphql/noded-ai-graphql-operations.yml
+- type: Authentication
+  url: authentication/noded-ai-authentication.yml
+- type: OAuthScopes
+  url: scopes/noded-ai-scopes.yml
+- type: MCPServer
+  url: mcp/noded-ai-mcp.yml
+- type: Conventions
+  url: conventions/noded-ai-conventions.yml
+- type: ErrorCatalog
+  url: errors/noded-ai-problem-types.yml
+- type: DataModel
+  url: data-model/noded-ai-data-model.yml
+- type: Lifecycle
+  url: lifecycle/noded-ai-lifecycle.yml
+- type: Conformance
+  url: conformance/noded-ai-conformance.yml
+- type: Plans
+  url: plans/noded-ai-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/noded-ai-rate-limits.yml
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 2
+  artifacts_added: 16
   pass: local-v1
