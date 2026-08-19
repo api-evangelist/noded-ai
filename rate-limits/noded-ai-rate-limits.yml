@@ -1,0 +1,34 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/developers
+fetched: '2026-08-13'
+note: >-
+  An honest zero. Noded publishes no rate limits, no throttling policy, no response headers, and
+  no exhaustion status code. Searched the developer page, AGENTS.md, llms.txt, the platform page
+  and the pricing page; decompiled the first-party SDK (@bigfootai/noded-sdk@0.1.2) and found no
+  handling of 429, Retry-After, X-RateLimit-* or RateLimit-* anywhere, and no retry/backoff logic
+  at all — the SDK raises a NodedError and stops. Live observation was not possible: the GraphQL
+  host api.getnoded.ai does not resolve in public DNS, so no unauthenticated response headers
+  could be captured.
+limits: []
+limit_count: 0
+response_headers: not-documented
+exhaustion_status: not-documented
+retry_after: not-documented
+retry_guidance: not-documented
+sdk_retry_behavior: none — callers wrap calls in try/catch; the SDK does not retry
+quota_model:
+  note: >-
+    What Noded DOES meter is commercial rather than runtime: plan ceilings on accounts,
+    applications and blocks (see plans/noded-ai-plans-pricing.yml). Those are subscription
+    limits, not request-rate limits, and no behaviour on hitting them is documented.
+  levers:
+    - accounts
+    - applications
+    - blocks
+sources_checked:
+  - {url: 'https://www.getnoded.ai/developers', status: 200, result: no limits documented}
+  - {url: 'https://www.getnoded.ai/developers/AGENTS.md', status: 200, result: no limits documented}
+  - {url: 'https://www.getnoded.ai/llms.txt', status: 200, result: no limits documented}
+  - {url: 'https://www.getnoded.ai/pricing', status: 200, result: plan ceilings only, no rate limits}
+  - {url: 'https://api.getnoded.ai/api/v1/graph', status: 0, result: NXDOMAIN — headers not observable}

@@ -1,0 +1,111 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  npm @bigfootai/noded-sdk@0.1.2 (dist/index.js, dist/index.d.ts) +
+  https://www.getnoded.ai/developers/AGENTS.md
+note: >-
+  NOT an SDL. Live introspection was not possible: the GraphQL host api.getnoded.ai does not
+  resolve in public DNS (NXDOMAIN from 8.8.8.8, curl exit 6), so no anonymous introspection
+  query could be sent. Everything below is read out of Noded's OWN published npm package —
+  the GraphQL documents the SDK sends, the input type names it references, and the selection
+  sets it declares. Field names are therefore real and provider-published, but this is a
+  partial projection of the schema, not the schema. A complete SDL needs authenticated
+  introspection with provisioned credentials.
+endpoint: https://api.getnoded.ai/api/v1/graph
+transport: HTTP POST (Apollo Server)
+dns_resolves: false
+ownership: >-
+  Endpoint is the DEFAULT_ENDPOINT constant compiled into Noded's own npm SDK
+  (@bigfootai/noded-sdk), on Noded's own getnoded.ai domain, and matches the "POST /api/v1/graph"
+  the provider's AGENTS.md names. First-party.
+authentication:
+  header: Authorization
+  scheme: Bearer
+  modes:
+    - mode: oidc
+      value: 'Bearer <access_token>'
+    - mode: token
+      value: 'Bearer <caller-supplied access_token>'
+    - mode: apiKey
+      value: 'Bearer apiKey:<apiKey>:<actAs>'
+      note: server-only; actAs is the tenant email to impersonate
+operations:
+  - operation: People
+    kind: query
+    root_field: searchTags
+    input_type: SearchTagsInput
+    sdk: noded.people.search(q)
+    returns: Person[]
+  - operation: Person
+    kind: query
+    root_field: tag
+    input_type: FindTagInput
+    sdk: noded.people.get(id)
+    returns: Person | null
+  - operation: Accounts
+    kind: query
+    root_field: searchTags
+    input_type: SearchTagsInput
+    sdk: noded.accounts.search(q)
+    returns: Account[]
+  - operation: Account
+    kind: query
+    root_field: tag
+    input_type: FindTagInput
+    sdk: noded.accounts.get(id)
+    returns: Account | null
+  - operation: Activity
+    kind: query
+    root_field: blocks
+    input_type: FindBlocksInput
+    sdk: noded.activity.forTag(tagId)
+    returns: ActivityItem[]
+  - operation: Notes
+    kind: query
+    root_field: blocks
+    input_type: FindBlocksInput
+    sdk: noded.notes.list()
+    returns: ActivityItem[]
+  - operation: CreateNote
+    kind: mutation
+    root_field: upsertOneNote
+    input_type: UpsertNoteInput
+    sdk: noded.notes.create({ title })
+    returns: 'Note { _id title }'
+  - operation: MemForTag
+    kind: query
+    root_field: userMemoriesForTag
+    input_type: FindUserMemoriesForTagInput!
+    sdk: noded.memory.forTag(tagId)
+    returns: 'UserMemory { _id entries { topic value confidence source dateCreated dateUpdated } }'
+  - operation: Mem
+    kind: query
+    root_field: userMemories
+    input_type: null
+    sdk: noded.memory.all()
+    returns: 'UserMemory[]'
+  - operation: Search
+    kind: query
+    root_field: searchTags
+    input_type: SearchTagsInput
+    sdk: noded.search(q)
+    returns: '{ people, accounts }'
+root_fields_observed:
+  - searchTags
+  - tag
+  - blocks
+  - upsertOneNote
+  - userMemoriesForTag
+  - userMemories
+input_types_observed:
+  - SearchTagsInput
+  - FindTagInput
+  - FindBlocksInput
+  - UpsertNoteInput
+  - FindUserMemoriesForTagInput
+operation_count: 10
+mutation_count: 1
+introspection:
+  attempted: true
+  result: unreachable
+  detail: api.getnoded.ai NXDOMAIN — no public DNS record, so the endpoint cannot be reached anonymously

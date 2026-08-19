@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/developers
+note: >-
+  A real, provider-run status page exists at status.getnoded.ai (HTTP 200, titled
+  "Noded AI — Service status", with 24h/7d/30d/90d uptime and a status-update history). Nothing
+  else in the lifecycle family is published: no changelog, no release notes, no versioning
+  policy, no deprecation policy, no Sunset/Deprecation header guidance, and no SLA.
+status_page:
+  url: https://status.getnoded.ai/
+  status: 200
+  published: true
+  fetched: '2026-08-13'
+  features:
+    - overall uptime, last 24 hours / 7 / 30 / 90 days
+    - status update history
+    - email subscription for updates
+  note: >-
+    JS-rendered vendor status page; monitor names and current state load client-side. Not linked
+    from the main site navigation or footer, so it is published but not discoverable from the
+    marketing site.
+versioning:
+  scheme: path
+  current_version: v1
+  evidence: 'https://api.getnoded.ai/api/v1/graph'
+  policy_url: null
+  policy_published: false
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: not-documented
+  deprecation_header: not-documented
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy of any kind is published, so no Deprecation pointer is emitted. The
+    only forward-looking commitment found is in the SDK README — "a first-class Personal Access
+    Token flow is on the roadmap" — which is a roadmap note, not a deprecation contract.
+sla:
+  published: false
+  url: null
+changelog:
+  published: false
+  url: null
+  note: >-
+    Probed https://www.getnoded.ai/changelog (404). The blog is dated and active but is
+    marketing/editorial content, not a product or API changelog.
+maturity:
+  api_stage: early
+  evidence:
+    - GraphQL API is v1 but has no public reference documentation
+    - first-party SDK is 0.1.2, pre-1.0
+    - both SDK releases (0.1.0, 0.1.2) shipped the same day, 2026-07-03, with nothing since
+    - developer credentials are provisioned by hand rather than self-serve
+support:
+  url: https://www.getnoded.ai/contact-us

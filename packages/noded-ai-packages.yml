@@ -1,0 +1,55 @@
+generated: '2026-08-13'
+method: searched
+source: https://registry.npmjs.org/@bigfootai/noded-sdk
+note: >-
+  One first-party client library. Published under the @bigfootai npm scope rather than a
+  @noded scope — Noded AI's GitHub organization is github.com/Notify-AI (org display name
+  "Noded AI"), and the package repository field points at github.com/Notify-AI/noded-sdk,
+  so the scope is a legacy company name, not a third party. The package is linked from
+  Noded's own developer page (https://www.getnoded.ai/developers), which confirms first-party.
+  Registries checked with no result: PyPI, RubyGems, crates.io, NuGet, Maven Central, pkg.go.dev,
+  Packagist.
+packages:
+  - language: javascript
+    registry: npm
+    name: '@bigfootai/noded-sdk'
+    official: true
+    version: 0.1.2
+    published: '2026-07-03'
+    first_published: '2026-07-03'
+    license: MIT
+    url: https://www.npmjs.com/package/@bigfootai/noded-sdk
+    repository: https://github.com/Notify-AI/noded-sdk
+    docs: https://www.getnoded.ai/developers
+    install: npm i @bigfootai/noded-sdk oidc-client-ts
+    description: >-
+      Typed browser SDK over the Noded (Apollo) GraphQL API. Ships people/accounts/activity/
+      notes/memory helpers, an OIDC auth mode, and a graphql() escape hatch.
+    peer_dependencies:
+      - oidc-client-ts ^3.0.0
+    versions_published:
+      - 0.1.0
+      - 0.1.2
+    note: >-
+      Pre-1.0 and single-release-week — 0.1.0 and 0.1.2 both published 2026-07-03, nothing since.
+      The linked repository github.com/Notify-AI/noded-sdk returns HTTP 404 (private or not yet
+      published), so the source is not publicly readable even though the package is.
+package_count: 1
+official_count: 1
+registries_checked:
+  - registry: npm
+    result: hit
+  - registry: pypi
+    result: none
+  - registry: rubygems
+    result: none
+  - registry: crates.io
+    result: none
+  - registry: nuget
+    result: none
+  - registry: maven-central
+    result: none
+  - registry: pkg.go.dev
+    result: none
+  - registry: packagist
+    result: none

@@ -1,0 +1,38 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/developers/AGENTS.md
+note: >-
+  Provider-published agent instructions, saved verbatim. Noded ships an AGENTS.md from its
+  developer page and tells developers to drop it into their project as AGENTS.md, .cursorrules
+  or CLAUDE.md so a coding agent can wire the @bigfootai/noded-sdk correctly. This is a
+  provider-authored agent skill, not one API Evangelist generated — nothing here is derived.
+skills:
+  - name: noded-sdk-rules-for-coding-agents
+    file: noded-ai-agents.md
+    title: Noded SDK — rules for coding agents
+    description: >-
+      Provider-authored operating rules for a coding agent embedding Noded customer context
+      (people, accounts, activity, notes, memory) into a front-end app via @bigfootai/noded-sdk:
+      install + OIDC client setup, the data model (people and accounts are tags; activity is
+      blocks; memory is topic/value), the preferred typed helpers, the GraphQL escape hatch,
+      error handling, and do/don't rules.
+    api: Noded GraphQL API
+    package: '@bigfootai/noded-sdk'
+    method: searched
+    source: https://www.getnoded.ai/developers/AGENTS.md
+    fetched: '2026-08-13'
+    http_status: 200
+    content_type: text/markdown
+    operations:
+      - people.search
+      - people.get
+      - accounts.search
+      - accounts.get
+      - activity.forTag
+      - notes.create
+      - notes.list
+      - memory.forTag
+      - memory.all
+      - search
+      - graphql
+skill_count: 1

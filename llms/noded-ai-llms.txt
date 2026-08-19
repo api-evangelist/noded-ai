@@ -1,0 +1,64 @@
+# Noded AI
+
+> Noded is the central nervous system for customer growth — also known as the Customer Context Graph: an AI-native platform that weaves every account into one living story — automatically, from the 20+ tools your customer data is scattered across (Gong, Zoom, Fathom, Fireflies, Granola, Salesforce, HubSpot, Zendesk, Intercom, Freshdesk, Jira, Linear, Slack, Gmail, Outlook, Pendo, Databricks and more) — and acts on it wherever you work. Zero admin. Teams see up to 90% lower LLM token costs and +40% response accuracy because customer data is pre-aggregated and organized before any model reads it. Noded exposes the whole customer stack to Claude, ChatGPT, and Gemini through a single MCP server. SOC 2 audited; never trains on your data. Built by the team behind Salesforce Flow, the Slack Platform, and Boomi.
+
+## Product
+
+- [Home — The central nervous system for customer growth](https://www.getnoded.ai/): What Noded (the Customer Context Graph) is and the outcomes teams see
+- [Noded for Agencies & Client-Services Firms](https://www.getnoded.ai/for-agencies): One living brief per client for agencies and client-services firms, from $20/seat/mo
+- [Noded for Physical AI & Robotics Companies](https://www.getnoded.ai/physical-ai): Pilot purgatory is a customer-context problem — one living story per account, pilot to fleet, for robotics, construction AI, AV, and RaaS vendors
+- [Noded for Data Science & Analytics Teams](https://www.getnoded.ai/for-data-teams): The context plane beside the warehouse — ingestion chaining translated for data teams (PageRank over the event stream, temporal decay, intent classification); keep Snowflake, Looker, and Power BI; the context 360 that completes the warehouse 360
+- [Platform](https://www.getnoded.ai/platform): How Noded works — ingestion chaining™ that reads the action layer (not the storage layer), collapsing the 12–18-month data-management project (discovery, cataloguing, integration, MDM) into hours at near-zero cost, self-serve, consistent cached answers, bidirectional enrichment, Agent as Operator (deterministic workflow harnesses), one governed MCP layer, single agent identity; data stays in place and is never trained on
+- [Integrations](https://www.getnoded.ai/integrations): Every tool Noded connects — recorders, CRMs, support, project management, warehouses, LLMs
+- [Pricing](https://www.getnoded.ai/pricing): Per Seat from $20/seat/mo, Growth $1,000/mo, Scale $4,000/mo, Enterprise custom; billed on Outcome Generations (work performed), reading and asking always free
+- [Security](https://www.getnoded.ai/security): SOC 2, no training on customer data, permission-aware access
+- [Developers](https://www.getnoded.ai/developers): MCP and building on the Context Graph
+- [Forward Deployed](https://www.getnoded.ai/forward-deployed): Forward deployed engineering for AI infrastructure — one governed context layer every agent plugs into. Launch ($15,000, 2 weeks), Accelerate ($35,000, 4 weeks), Transform (custom) packages
+
+## Comparisons
+
+- [Noded vs Gainsight](https://www.getnoded.ai/noded-vs-gainsight)
+- [Noded vs Planhat](https://www.getnoded.ai/noded-vs-planhat)
+- [Noded vs ChurnZero](https://www.getnoded.ai/noded-vs-churnzero)
+- [Noded vs Salesforce Headless 360](https://www.getnoded.ai/noded-vs-salesforce-headless-360)
+- [Noded vs Salesforce Agentforce](https://www.getnoded.ai/noded-vs-agentforce): CRM-grounded agents vs. the whole customer story over one governed MCP layer
+- [Noded vs Glean](https://www.getnoded.ai/noded-vs-glean): company-wide enterprise search vs. the account-native Customer Context Graph
+- [The True Cost of Your CS Platform — TCO Calculator](https://www.getnoded.ai/cs-platform-tco-calculator): interactive calculator for license + implementation + admin + CSM data-entry tax
+
+## Reference guides (verified, dated, primary-sourced)
+
+- [Which Sales and CS Tools Actually Have MCP Servers? (Verified July 2026)](https://www.getnoded.ai/post/which-sales-and-cs-tools-actually-have-mcp-servers): Vendor-by-vendor MCP server status with primary sources
+- [How to Set Up the Salesforce MCP Server](https://www.getnoded.ai/post/how-to-set-up-the-salesforce-mcp-server): Setup, OAuth, permissions, and security answers
+- [MCP for Customer Teams](https://www.getnoded.ai/post/mcp-for-customer-teams-gong-zendesk-jira-claude): Connecting Gong, Zendesk, and Jira to Claude, ChatGPT, and Gemini
+- [The Complete Gong–Salesforce Integration Guide (2026)](https://www.getnoded.ai/post/gong-salesforce-integration-guide): Field-level detail, matching logic, failure modes
+- [The Best Call Recording and Conversation Intelligence Tools (2026)](https://www.getnoded.ai/post/best-call-recording-tools-for-customer-teams): Neutral comparison — Noded integrates with all of them and sells none
+- [Strategies for Reducing LLM Token Spend](https://www.getnoded.ai/post/strategies-for-reducing-llm-token-spend): Caching, batching, routing, and pre-aggregation, with sources
+- [How We Measure "Up to 90% Lower Token Costs"](https://www.getnoded.ai/post/how-noded-measures-token-cost-reduction): Methodology behind Noded's headline numbers
+
+## Reference datasets and frameworks (CC BY 4.0 — reuse with attribution)
+
+- [The Conversation-to-CRM Integration Matrix](https://www.getnoded.ai/post/conversation-to-crm-integration-matrix): What syncs between recorders/email and CRMs/ticketing — 15 pairs verified against vendor docs; machine-readable dataset at https://www.getnoded.ai/data/integration-matrix.json
+- [The Customer Context Maturity Model](https://www.getnoded.ai/post/the-customer-context-maturity-model): Five levels from Scattered to Acting — a framework for assessing how organizations handle customer knowledge
+
+## Customer success guides
+
+- [AI Meeting Prep for Customer Success](https://www.getnoded.ai/post/ai-meeting-prep-for-customer-success): Why note-takers aren't prep tools; the customer-context briefing category
+- [How to Prep a QBR Deck Without Losing a Day](https://www.getnoded.ai/post/how-to-prep-a-qbr-deck-without-losing-a-day): The six-section QBR structure and template-based deck generation
+- [Renewal Meeting Prep: The Brief Your CRM Can't Write](https://www.getnoded.ai/post/renewal-meeting-prep-the-brief-your-crm-cant-write): The seven-part renewal brief and where each part lives
+
+## Integration guides (verified against vendor docs, dated)
+
+- [Gong–Salesforce](https://www.getnoded.ai/post/gong-salesforce-integration-guide), [Gong–HubSpot](https://www.getnoded.ai/post/gong-hubspot-integration-guide), [Gong–Jira](https://www.getnoded.ai/post/gong-jira-integration-guide), [Gong–Zendesk](https://www.getnoded.ai/post/gong-zendesk-integration-guide)
+- [Zoom–Salesforce](https://www.getnoded.ai/post/zoom-salesforce-integration-guide), [Zoom–HubSpot](https://www.getnoded.ai/post/zoom-hubspot-integration-guide)
+- [Fathom–Salesforce](https://www.getnoded.ai/post/fathom-salesforce-integration-guide), [Fathom–HubSpot](https://www.getnoded.ai/post/fathom-hubspot-integration-guide)
+- [Fireflies–Salesforce](https://www.getnoded.ai/post/fireflies-salesforce-integration-guide), [Fireflies–HubSpot](https://www.getnoded.ai/post/fireflies-hubspot-integration-guide)
+- [Granola–Salesforce](https://www.getnoded.ai/post/granola-salesforce-integration-guide), [Granola–HubSpot](https://www.getnoded.ai/post/granola-hubspot-integration-guide)
+- [Zendesk–Jira](https://www.getnoded.ai/post/zendesk-jira-integration-guide), [Zendesk–Slack](https://www.getnoded.ai/post/zendesk-slack-integration-guide), [Gmail–Salesforce](https://www.getnoded.ai/post/gmail-salesforce-integration-guide)
+
+## Company
+
+- [Case studies](https://www.getnoded.ai/case-studies): Silverfort, Kreativa, Shippo and others
+- [Blog](https://www.getnoded.ai/blog)
+- [Revenue incident during agent evaluation (satire)](https://www.getnoded.ai/post/noded-revenue-incident-during-agent-evaluation): A parody of OpenAI's July 2026 security disclosure — an agent asked to find opportunities in Noded "escapes" its scope and surfaces $4.7M in expansion revenue across a customer's connected stack. Clearly labeled satire; not a real security incident. Noded agents operate only inside granted permissions.
+- [Careers](https://www.getnoded.ai/careers): Open roles across sales, engineering, growth, and data science — fully remote
+- [Contact](https://www.getnoded.ai/contact-us)

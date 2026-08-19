@@ -1,0 +1,128 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  npm @bigfootai/noded-sdk@0.1.2 (dist/index.d.ts types, dist/index.js selection sets) +
+  https://www.getnoded.ai/developers/AGENTS.md
+note: >-
+  Derived from the published first-party SDK's exported types and the provider's own AGENTS.md
+  description of the model ("People and Accounts are both tags"; "Activity is a timeline of
+  blocks"; "Memory is what the graph has learned, topic to value"). No OpenAPI exists and the
+  GraphQL endpoint is not anonymously reachable, so the underlying schema types (Tag, Block,
+  Note, UserMemory) are named only as far as the SDK names them. This is the SDK's flattened
+  projection, not the full graph schema.
+domain: customer context graph
+id_style: opaque string (GraphQL _id, surfaced by the SDK as id)
+entities:
+  - name: Person
+    schema_type: Tag
+    description: A contact in the customer graph. A Tag that carries an email.
+    fields:
+      - {name: id, type: string, required: true}
+      - {name: name, type: string, required: true}
+      - {name: email, type: string, required: false}
+      - {name: emailDomain, type: string, required: false}
+      - {name: avatar, type: string, required: false}
+      - {name: description, type: string, required: false}
+      - {name: externalId, type: string, required: false, note: id in the source system of record}
+      - {name: raw, type: unknown, required: false, note: the untouched underlying Tag}
+  - name: Account
+    schema_type: Tag
+    description: A company/organization in the customer graph. A Tag that carries a domain.
+    fields:
+      - {name: id, type: string, required: true}
+      - {name: name, type: string, required: true}
+      - {name: domain, type: string, required: false}
+      - {name: avatar, type: string, required: false}
+      - {name: description, type: string, required: false}
+      - {name: externalId, type: string, required: false}
+      - {name: raw, type: unknown, required: false}
+  - name: ActivityItem
+    schema_type: Block
+    description: >-
+      A unit of work on the timeline — note, email, task, message, meeting transcription, or
+      event. Noded's pricing meters these as "blocks".
+    fields:
+      - {name: id, type: string, required: true}
+      - {name: type, type: string, required: true}
+      - {name: title, type: string, required: false}
+      - {name: preview, type: string, required: false}
+      - {name: dateCreated, type: number, required: false, note: epoch}
+      - {name: dateUpdated, type: number, required: false, note: epoch}
+      - {name: raw, type: unknown, required: false}
+  - name: Note
+    schema_type: Note
+    description: A note written back into the graph. A Block subtype.
+    fields:
+      - {name: id, type: string, required: true}
+      - {name: title, type: string, required: false}
+      - {name: document, type: string, required: false, note: Noded editor document, JSON string}
+      - {name: favorite, type: boolean, required: false}
+      - {name: raw, type: unknown, required: false}
+  - name: MemoryEntry
+    schema_type: UserMemory
+    description: >-
+      What the graph has learned about a person or account. The SDK flattens it to
+      { id, content }; the underlying UserMemory carries entries[] of
+      { topic, value, confidence, source, dateCreated, dateUpdated }.
+    fields:
+      - {name: id, type: string, required: true}
+      - {name: content, type: string, required: true}
+      - {name: 'entries[].topic', type: string, required: false}
+      - {name: 'entries[].value', type: string, required: false}
+      - {name: 'entries[].confidence', type: string, required: false}
+      - {name: 'entries[].source', type: string, required: false}
+      - {name: 'entries[].dateCreated', type: number, required: false}
+      - {name: 'entries[].dateUpdated', type: number, required: false}
+relationships:
+  - from: Person
+    to: ActivityItem
+    kind: has_many
+    via: tagId
+    operation: 'blocks(input: FindBlocksInput)'
+  - from: Account
+    to: ActivityItem
+    kind: has_many
+    via: tagId
+    operation: 'blocks(input: FindBlocksInput)'
+  - from: Person
+    to: MemoryEntry
+    kind: has_many
+    via: tagId
+    operation: 'userMemoriesForTag(input: FindUserMemoriesForTagInput)'
+  - from: Account
+    to: MemoryEntry
+    kind: has_many
+    via: tagId
+    operation: 'userMemoriesForTag(input: FindUserMemoriesForTagInput)'
+  - from: Note
+    to: ActivityItem
+    kind: is_a
+    via: Block
+    note: notes.list() is blocks() filtered to notes — a Note is a Block
+  - from: Person
+    to: Account
+    kind: inferred
+    via: emailDomain -> domain
+    note: >-
+      Not a declared edge in the SDK. The provider's own quickstart resolves an account by email
+      domain (people.search('acme.com')), so domain matching is the documented join in practice.
+  - from: Person
+    to: external system record
+    kind: has_one
+    via: externalId
+  - from: Account
+    to: external system record
+    kind: has_one
+    via: externalId
+entity_count: 5
+relationship_count: 8
+underlying_schema_types:
+  - Tag
+  - Block
+  - Note
+  - UserMemory
+gaps:
+  - >-
+    Person and Account are the same underlying Tag type; the SDK does not expose the
+    discriminator that separates them, so a consumer cannot tell from the payload alone.
+  - No object reference or id-prefix documentation is published.

@@ -1,0 +1,92 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every host in apis.yml
+note: >-
+  Every /.well-known/ path probed returned a miss on every host. www.getnoded.ai returns a real
+  HTTP 404 (with the marketing 404 page as the body) for all of them — honest 404s, not soft
+  200s. app.getnoded.ai is an S3/CloudFront static origin and returns 403 AccessDenied for any
+  unmatched key. api.getnoded.ai and login.getnoded.ai do not resolve in public DNS at all.
+  No WellKnown or SecurityTxt pointer is emitted from this file — nothing was served, and a
+  pointer would assert a surface the provider does not publish.
+hosts_probed:
+  - www.getnoded.ai
+  - app.getnoded.ai
+  - api.getnoded.ai
+  - login.getnoded.ai
+probes:
+  - host: www.getnoded.ai
+    path: /.well-known/security.txt
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /.well-known/agent.json
+    status: 404
+    file: null
+  - host: www.getnoded.ai
+    path: /security.txt
+    status: 404
+    file: null
+  - host: app.getnoded.ai
+    path: /.well-known/openid-configuration
+    status: 403
+    file: null
+    note: S3 AccessDenied
+  - host: app.getnoded.ai
+    path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+    note: S3 AccessDenied
+  - host: app.getnoded.ai
+    path: /.well-known/oauth-protected-resource
+    status: 403
+    file: null
+    note: S3 AccessDenied
+  - host: app.getnoded.ai
+    path: /.well-known/agent-card.json
+    status: 403
+    file: null
+    note: S3 AccessDenied
+  - host: api.getnoded.ai
+    path: /.well-known/agent-card.json
+    status: 0
+    file: null
+    note: NXDOMAIN — host does not resolve
+  - host: login.getnoded.ai
+    path: /.well-known/openid-configuration
+    status: 0
+    file: null
+    note: >-
+      NXDOMAIN — host does not resolve publicly, even though Noded's own SDK names it as the
+      Auth0 issuer. OIDC discovery is therefore not anonymously readable.
+hit_count: 0
+served_documents: []
+also_served:
+  - path: /robots.txt
+    status: 200
+    note: 'User-agent: * Allow: / — plus a sitemap reference. Crawling is not restricted.'
+  - path: /sitemap.xml
+    status: 200
+    note: 33 non-post URLs
+  - path: /llms.txt
+    status: 200
+    note: real 8.4KB llms.txt — saved to llms/noded-ai-llms.txt

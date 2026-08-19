@@ -1,0 +1,98 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  npm @bigfootai/noded-sdk@0.1.2 (dist/index.js, dist/index.d.ts),
+  https://www.getnoded.ai/developers, https://www.getnoded.ai/developers/AGENTS.md
+note: >-
+  Derived from Noded's own published SDK and developer page. Noded publishes no API reference or
+  convention guide, so anything not observable in the SDK is recorded as not-documented rather
+  than guessed.
+api_style: GraphQL (Apollo)
+endpoint: https://api.getnoded.ai/api/v1/graph
+transport: HTTP POST, application/json
+authentication:
+  style: bearer
+  header: Authorization
+  see: authentication/noded-ai-authentication.yml
+versioning:
+  style: path
+  current: v1
+  evidence: /api/v1/graph
+  policy_published: false
+  note: >-
+    GraphQL schema evolution (additive fields, deprecated directives) is the usual mechanism for
+    an Apollo API; Noded documents no version or deprecation policy. See lifecycle/.
+idempotency:
+  supported: unknown
+  documented: false
+  header: null
+  note: >-
+    No idempotency key, header, or retry-safety guidance appears anywhere in the SDK, the
+    developer page, or AGENTS.md. The one mutation the SDK exposes is named upsertOneNote, whose
+    upsert semantics imply write convergence on a key, but Noded does not document that as an
+    idempotency contract — so no Idempotency pointer is emitted.
+pagination:
+  style: limit
+  params:
+    - name: limit
+      in: SearchOptions / *Input
+      default: null
+      note: SDK passes limit through to SearchTagsInput / FindBlocksInput
+  cursor: not-documented
+  offset: not-documented
+  response_fields: not-documented
+  note: >-
+    The SDK exposes only { limit, select }. No cursor, offset, page token, or total-count field
+    is documented, so a consumer cannot page past the first limit deterministically.
+field_selection:
+  supported: true
+  mechanism: GraphQL selection set
+  sdk_param: select
+  note: >-
+    Every helper accepts a `select` string that overrides the SDK's default selection set. This
+    is the GraphQL-native equivalent of sparse fieldsets — the provider's guidance is to widen,
+    not narrow.
+  default_selections:
+    tag_fields: default TAG_FIELDS selection compiled into the SDK
+    block_fields: default BLOCK_FIELDS selection compiled into the SDK
+escape_hatch:
+  method: noded.graphql(query, variables)
+  note: any Noded GraphQL operation; inputs use the schema's *Input types
+metadata:
+  supported: unknown
+  documented: false
+request_id_tracing:
+  supported: unknown
+  documented: false
+  note: no request-id, trace, or correlation header is set or read by the SDK
+error_envelope:
+  style: graphql
+  shape: 'GraphQL response { data, errors[] } — errors[].message joined by the SDK'
+  rfc9457: false
+  client_error_type: NodedError
+  client_error_kinds:
+    - auth
+    - graphql
+    - network
+  see: errors/noded-ai-problem-types.yml
+rate_limiting:
+  documented: false
+  response_headers: not-documented
+  see: rate-limits/noded-ai-rate-limits.yml
+retries:
+  documented: false
+  sdk_behavior: none — the SDK does not retry; callers wrap in try/catch
+permissions:
+  model: tenant + signed-in-user permissions enforced server-side
+  client_side_enforcement: false
+  note: >-
+    Provider guidance is explicit — "scope everything to the signed-in user; the API already
+    enforces their tenant + permissions" — and never ship a secret to a browser.
+cross_links:
+  authentication: authentication/noded-ai-authentication.yml
+  scopes: scopes/noded-ai-scopes.yml
+  errors: errors/noded-ai-problem-types.yml
+  lifecycle: lifecycle/noded-ai-lifecycle.yml
+  rate_limits: rate-limits/noded-ai-rate-limits.yml
+  data_model: data-model/noded-ai-data-model.yml
+  graphql: graphql/noded-ai-graphql-operations.yml

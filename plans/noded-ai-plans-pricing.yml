@@ -1,0 +1,115 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/pricing
+fetched: '2026-08-13'
+http_status: 200
+currency: USD
+note: >-
+  Public, itemized, self-serve-visible pricing. Three levers are metered across every tier —
+  accounts (customer companies tracked), applications (connected tools), and blocks (units of
+  work: an email, transcription, document, record). Seat licensing and platform licensing are
+  alternatives, not a ladder. Both an annual and a month-to-month price are published for every
+  paid tier. All plan limits are stated as "up to" amounts. Note that Noded's llms.txt describes
+  billing in terms of "Outcome Generations" while the live pricing page bills on
+  accounts/applications/blocks; the pricing page is treated as authoritative here.
+plans:
+  - name: Per User
+    slug: per-user
+    licensing: per-seat
+    price: 20
+    price_monthly: 25
+    currency: USD
+    period: month
+    unit: user
+    billing: annual (monthly available at the higher rate)
+    price_note: 'from $20/user/month billed annually; from $25/user/month month-to-month'
+    seats: named seats, all users
+    limits:
+      accounts: 100
+      applications: 5
+      blocks: 2000
+    limits_qualifier: up to
+    self_serve: true
+    cta: Get started
+  - name: Growth
+    slug: growth
+    licensing: platform
+    price: 1000
+    price_monthly: 1250
+    currency: USD
+    period: month
+    unit: platform
+    billing: annual (monthly available at the higher rate)
+    seats: unlimited
+    limits:
+      accounts: 1000
+      applications: 10
+      blocks: 100000
+    limits_qualifier: up to
+    self_serve: true
+    cta: Get started
+  - name: Scale
+    slug: scale
+    licensing: platform
+    price: 4000
+    price_monthly: 4500
+    currency: USD
+    period: month
+    unit: platform
+    billing: annual (monthly available at the higher rate)
+    seats: unlimited
+    limits:
+      accounts: 5000
+      applications: 20
+      blocks: 500000
+    limits_qualifier: up to
+    self_serve: true
+    cta: Get started
+  - name: Custom
+    slug: custom
+    licensing: negotiated
+    price: null
+    currency: USD
+    period: null
+    seats: negotiated
+    limits:
+      accounts: negotiated
+      applications: negotiated
+      blocks: negotiated
+    self_serve: false
+    cta: Talk to us
+    note: >-
+      Provider states custom can mean smaller, larger, or simply different — the three levers
+      move in any direction.
+plan_count: 4
+free_tier: false
+trial: not-published
+overage: not-published
+overage_note: >-
+  No overage rate is published; limits are expressed as "up to" ceilings with no stated
+  behaviour on exhaustion.
+api_pricing:
+  metered_separately: false
+  note: >-
+    The GraphQL API and the MCP layer are not priced as separate line items. API access rides on
+    the platform licence, and developer credentials are provisioned on request rather than
+    purchased.
+services:
+  - name: Forward Deployed — Launch
+    price: 15000
+    currency: USD
+    period: one-time
+    duration: 2 weeks
+    source: https://www.getnoded.ai/forward-deployed
+  - name: Forward Deployed — Accelerate
+    price: 35000
+    currency: USD
+    period: one-time
+    duration: 4 weeks
+    source: https://www.getnoded.ai/forward-deployed
+  - name: Forward Deployed — Transform
+    price: null
+    currency: USD
+    period: one-time
+    duration: custom
+    source: https://www.getnoded.ai/forward-deployed

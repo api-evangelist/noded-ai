@@ -1,0 +1,78 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  npm @bigfootai/noded-sdk@0.1.2 (dist/index.js NodedError, dist/index.d.ts) +
+  https://www.getnoded.ai/developers/AGENTS.md
+note: >-
+  Noded publishes no error reference page and no OpenAPI, so there are no HTTP status/problem
+  types to derive. What IS published is the error taxonomy the first-party SDK raises, and the
+  GraphQL error envelope underneath it. That is the whole documented error contract — recorded
+  as-is, with nothing invented.
+format: graphql-errors
+rfc9457: false
+envelope:
+  shape: 'GraphQL { data, errors[] }'
+  field: errors
+  member: message
+  note: >-
+    The SDK collapses errors[] into a single NodedError by joining every errors[].message with
+    "; " and keeping the raw array on .detail — so a caller reading only .message loses the
+    per-error structure and must read .detail to recover it.
+client_error_class:
+  name: NodedError
+  fields:
+    - name: message
+      type: string
+    - name: kind
+      type: "'auth' | 'graphql' | 'network'"
+    - name: detail
+      type: unknown
+      note: the underlying error or the raw GraphQL errors[] array
+problem_types:
+  - id: auth
+    kind: auth
+    title: Not authorized
+    message: Not authorized — sign in again (noded.connect())
+    cause: >-
+      No usable access token, or the token was rejected. Also raised when the OIDC sign-in
+      itself fails.
+    remediation: Prompt the user to sign in again via noded.connect().
+    retryable: false
+    source: sdk
+  - id: graphql
+    kind: graphql
+    title: GraphQL error
+    message: joined errors[].message from the GraphQL response
+    cause: >-
+      The API returned a 2xx GraphQL response carrying errors[] — validation failure, unknown
+      field, permission denial, or a resolver error.
+    remediation: >-
+      Read .detail for the raw errors[] array. Do not guess field names — use the typed helpers
+      or the documented *Input types.
+    retryable: false
+    source: api
+  - id: network
+    kind: network
+    title: Network request to Noded failed
+    message: Network request to Noded failed
+    cause: transport failure reaching https://api.getnoded.ai/api/v1/graph
+    remediation: retry with backoff; check connectivity and endpoint override
+    retryable: true
+    source: transport
+  - id: not-connected
+    kind: auth
+    title: Not connected
+    class: NotConnectedError
+    cause: an SDK call was made before await noded.connect() completed
+    remediation: call await noded.connect() once before using any resource helper
+    retryable: false
+    source: sdk
+problem_type_count: 4
+http_status_codes: not-documented
+gaps:
+  - No public error-code registry or reference page.
+  - >-
+    No HTTP status semantics documented — GraphQL over POST typically answers 200 even for
+    application errors, so status-based handling is not available to a consumer.
+  - No documented distinction between a permission denial and a not-found result.
+  - No RFC 9457 problem+json.

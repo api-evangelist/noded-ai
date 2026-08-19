@@ -1,0 +1,36 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/developers
+docs: https://www.getnoded.ai/developers
+note: >-
+  Noded publishes no scope/permission reference page. The only scopes visible in public are the
+  OIDC scopes the first-party SDK requests by default against the Noded Auth0 tenant — these are
+  standard OpenID Connect scopes, not Noded-specific API permissions. Authorization in Noded is
+  expressed as tenant + per-user permissions enforced server-side (and, on the MCP layer, as
+  per-agent tool scoping), not as named OAuth scopes a developer selects. Derivation from an
+  OpenAPI was not possible: Noded publishes no OpenAPI. Recorded as an honest partial.
+issuer: https://login.getnoded.ai/
+audience: provisioned per customer (the Noded API audience)
+scopes:
+  - scope: openid
+    standard: true
+    spec: OpenID Connect Core 1.0
+    description: Requests an ID token for the signed-in Noded user.
+  - scope: profile
+    standard: true
+    spec: OpenID Connect Core 1.0
+    description: Basic profile claims for the signed-in Noded user.
+  - scope: email
+    standard: true
+    spec: OpenID Connect Core 1.0
+    description: Email claim for the signed-in Noded user.
+  - scope: offline_access
+    standard: true
+    spec: OpenID Connect Core 1.0
+    description: Refresh token so the SDK can silently refresh without re-prompting.
+scope_count: 4
+provider_specific_scope_count: 0
+authorization_model: >-
+  Tenant-scoped, permission-aware. Every call runs as the signed-in user and the API enforces
+  that user's permissions; the MCP layer additionally provisions tools per agent identity, so
+  what an agent may see is scoped to the agent rather than to the organization.

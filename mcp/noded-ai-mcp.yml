@@ -1,0 +1,72 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/platform
+supporting_source:
+  - https://www.getnoded.ai/llms.txt
+  - https://www.getnoded.ai/developers
+name: Noded MCP layer
+status: published
+note: >-
+  Noded ships a hosted, consolidated MCP layer as a core product surface — its own words:
+  "One MCP layer for your entire stack. Zero servers to run", "Noded exposes the whole customer
+  stack to Claude, ChatGPT, and Gemini through a single MCP server", "no MCP servers to deploy,
+  patch, or monitor". The server is real and it is hosted BY Noded, so the deployment mode is
+  remote. What Noded does NOT publish anywhere public is the endpoint URL, the tool list, or the
+  connection instructions — those are provisioned inside the app after sign-in, and the tools an
+  agent sees are deliberately scoped per agent identity by the customer. No endpoint is recorded
+  below because none was found; guessing one would assert a verified agent surface that was never
+  verified.
+deployment:
+  mode: remote
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+  endpoint_published: false
+  endpoint_note: >-
+    No connection URL is published on getnoded.ai, in llms.txt, on the developers page, or in the
+    first-party npm SDK. Access starts at https://app.getnoded.ai (the "Get started" link from
+    Noded's own MCP writeups). Establishing the endpoint requires an authenticated Noded account.
+tools:
+  status: not-published
+  tool_count: null
+  note: >-
+    No tools/list manifest is publicly reachable and no tool catalog is documented. Noded's
+    positioning is that tool exposure is customer-configured — "you define the data that's
+    exposed, who it's exposed to, and how it's described to your agents" — so the tool set is
+    per-tenant rather than a fixed published catalog. Nothing derived: the provider publishes no
+    OpenAPI to derive candidate tools from, and inventing a tool list here would be fabrication.
+characteristics:
+  hosted_by_provider: true
+  servers_to_run: 0
+  per_agent_tool_scoping: true
+  single_agent_identity: true
+  identity_note: >-
+    One identity per agent workload, mapped to the underlying identity in each connected app;
+    tools are explicitly provisioned to that identity. Each connected app still enforces its own
+    permissions and keeps its own audit trail.
+  write_back: opt-in
+  trains_on_customer_data: false
+probes:
+  - url: https://mcp.getnoded.ai/
+    result: NXDOMAIN
+    status: 0
+  - url: https://api.getnoded.ai/mcp
+    result: NXDOMAIN
+    status: 0
+  - url: https://app.getnoded.ai/mcp
+    method: POST tools/list
+    status: 405
+    result: >-
+      S3/CloudFront static origin returns MethodNotAllowed — SPA route, not an MCP transport.
+      GET on the same path returns the app's HTML shell; rejected as a false positive.
+  - url: https://www.getnoded.ai/mcp
+    method: POST tools/list
+    status: 301
+    result: redirect to the marketing site, not an MCP transport
+  - url: https://www.getnoded.ai/.well-known/oauth-authorization-server
+    status: 404
+  - url: https://app.getnoded.ai/.well-known/oauth-protected-resource
+    status: 403
+    result: S3 AccessDenied — no OAuth resource metadata served

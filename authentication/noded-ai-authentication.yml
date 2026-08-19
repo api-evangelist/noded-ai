@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.getnoded.ai/developers
+docs: https://www.getnoded.ai/developers
+supporting_source: >-
+  https://www.getnoded.ai/developers/AGENTS.md and npm @bigfootai/noded-sdk@0.1.2
+  (dist/index.d.ts AuthConfig, dist/index.js authorization())
+note: >-
+  Noded has no self-serve API credential flow. The developer page states plainly that the
+  issuer, client ID and API audience are "provided by Noded" after you request access and send
+  them your app origins — so obtaining credentials is a human handoff via getnoded.ai/contact-us,
+  not a console. The mechanism itself (Auth0 OIDC authorization-code + PKCE, silent refresh) is
+  fully documented in public.
+summary: >-
+  Three auth modes over one Bearer-token GraphQL endpoint. Browser apps use OIDC against a
+  Noded-hosted Auth0 tenant; servers may use an API key; callers with their own OIDC flow may
+  supply a token directly.
+schemes:
+  - name: oidc
+    type: openIdConnect
+    default: true
+    recommended_for: browser / SPA
+    issuer: https://login.getnoded.ai/
+    provider: Auth0
+    flow: authorization_code
+    pkce: true
+    response_type: code
+    audience: provisioned per customer (the Noded API audience)
+    client_id: provisioned per customer (SPA client)
+    redirect_uri: defaults to window.location.origin
+    scope_default: openid profile email offline_access
+    refresh: silent refresh via offline_access
+    token_placement: 'Authorization: Bearer <access_token>'
+    secrets_in_browser: false
+    permissions: >-
+      calls are automatically scoped to the signed-in user's tenant and permissions; the API
+      enforces them server-side
+  - name: token
+    type: http
+    scheme: bearer
+    recommended_for: server-rendered apps that already ran their own OIDC flow
+    token_placement: 'Authorization: Bearer <access_token>'
+    note: caller supplies getToken(); the SDK does not manage the lifecycle
+  - name: apiKey
+    type: http
+    scheme: bearer
+    recommended_for: server only
+    token_placement: 'Authorization: Bearer apiKey:<apiKey>:<actAs>'
+    requires:
+      - apiKey — a Noded service or personal access token
+      - actAs — the tenant email the key acts as
+    warning: >-
+      Provider states explicitly this must NEVER be shipped to a browser. Noded's own README
+      notes a first-class Personal Access Token flow is still "on the roadmap", so this composite
+      Bearer string is the current server path.
+    caveat: >-
+      The credential is transported as a colon-delimited composite inside a Bearer token rather
+      than a standard bearer credential; it is not an OAuth 2.0 access token.
+mutual_tls: false
+credential_self_serve: false
+credential_request_url: https://www.getnoded.ai/contact-us
+embedding_pattern:
+  - name: server proxy
+    description: >-
+      When viewers are not Noded users, run a proxy that holds the credential and point the SDK
+      at it via the endpoint option; the browser never sees the token.
+error_on_auth_failure:
+  kind: auth
+  message: Not authorized — sign in again (noded.connect())
+  remediation: re-run noded.connect()
+scheme_count: 3
