@@ -42,6 +42,8 @@ description: 'Noded AI is a customer context graph for customer success, retenti
   audience) and the MCP endpoint are provisioned by the Noded team on request rather than
   self-serve, and no OpenAPI, GraphQL SDL, or public API reference is published.'
 url: https://raw.githubusercontent.com/api-evangelist/noded-ai/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
