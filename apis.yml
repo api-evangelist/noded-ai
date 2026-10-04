@@ -68,7 +68,7 @@ tags:
 - AI Agents
 - GraphQL
 - MCP
-- agent-native
+- Agent-Native
 - Customer Context Graph
 tags_raw:
 - Company
@@ -84,6 +84,7 @@ tags_raw:
 - MCP
 - Agent Native
 - Customer Context Graph
+- agent-native
 apis:
 - name: Noded GraphQL API
   description: >-
